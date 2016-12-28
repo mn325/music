@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>匿名留言板</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/css/example.css"/>
+    <script type="text/javascript">
+        var url="<{:U('Comment/setMessage')}>";
+    </script>
+</head>
+<body ontouchstart>
+    <div class="hd">
+        <h1 class="page_title">留言板</h1>        
+    </div>
+    <div class="bd">
+        
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <textarea class="weui_textarea" placeholder="来都来了，不写点什么吗？" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="weui_btn_area">
+            <a class="weui_btn weui_btn_primary" href="javascript:;">确定</a>
+        </div>
+        <!--BEGIN dialog2-->
+        <div class="weui_dialog_alert" id="dialog" style="display: none;">
+            <div class="weui_mask"></div>
+            <div class="weui_dialog">
+                <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示</strong></div>
+                <div class="weui_dialog_bd">请输入留言内容！</div>
+                <div class="weui_dialog_ft">
+                    <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+                </div>
+            </div>
+        </div>
+        <!--END dialog2-->
+        <!--BEGIN toast-->
+        <div id="toast" style="display: none;">
+            <div class="weui_mask_transparent"></div>
+            <div class="weui_toast">
+                <i class="weui_icon_toast"></i>
+                <p class="weui_toast_content">留言成功</p>
+            </div>
+        </div>
+        <!--end toast-->
+
+        <!-- loading toast -->
+        <div id="loadingToast" class="weui_loading_toast" style="display:none;">
+            <div class="weui_mask_transparent"></div>
+            <div class="weui_toast">
+                <div class="weui_loading">
+                    <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+                </div>
+                <p class="weui_toast_content">正在提交</p>
+            </div>
+        </div>
+
+        <h1 class="weui_article">留言列表</h1>
+        
+        <foreach name="res" item="v">
+        <div class="weui_panel">
+            <div class="weui_panel_hd">来自<{$v['address']?$v['address']:'微信@'}>的留言</div>
+            <div class="weui_panel_bd">
+                <div class="weui_media_box weui_media_text">
+                    <!-- <h4 class="weui_media_title">标题一</h4> -->
+                    <p class="weui_media_desc"><{$v['content']}></p>
+                    <ul class="weui_media_info">
+                        <li class="weui_media_info_meta"><{$v['address']?'留言板':'微信客户端'}></li>
+                        <li class="weui_media_info_meta"><{$v['time']|time_format}></li>
+                        <li class="weui_media_info_meta weui_media_info_meta_extra"><{$v['address']?$v['address']:'微信@'}></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </foreach>
+        
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/suggest.js"></script>  
+</body>
+</html>
